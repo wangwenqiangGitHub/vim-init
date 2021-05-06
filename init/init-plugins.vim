@@ -17,6 +17,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf']
+	let g:bundle_group += ['coc']
 endif
 
 
@@ -53,7 +54,13 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
 
-
+" 多光标
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+let g:VM_maps["Add Cursor Down"]    = '<m-j>'   " new cursor down
+let g:VM_maps["Add Cursor Up"]      = '<m-k>'   " new cursor up
 "----------------------------------------------------------------------
 " Dirvish 设置：自动排序并隐藏文件，同时定位到相关文件
 " 这个排序函数可以将目录排在前面，文件排在后面，并且按照字母顺序排序
@@ -427,7 +434,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 		let g:Lf_ShortcutB = '<m-n>'
 
 		" CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
-		noremap <c-n> :LeaderfMru<cr>
+		noremap <leader>m :LeaderfMru<cr>
 
 		" ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
 		noremap <m-p> :LeaderfFunction!<cr>
@@ -441,6 +448,13 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" ALT+m 全局 tags 模糊匹配
 		noremap <m-m> :LeaderfTag<cr>
 
+		"整个工程搜索字段
+		noremap <m-b> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<cr><cr>
+		noremap <m-f> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<cr><cr>
+		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<cr>
+		"search word under cursor in *.h and *.cpp files.
+		noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,cpp}", expand("<cword>"))<cr><cr>
+
 		" 最大历史文件保存 2048 个
 		let g:Lf_MruMaxFiles = 2048
 
@@ -449,15 +463,19 @@ if index(g:bundle_group, 'leaderf') >= 0
 
 		" 如何识别项目目录，从当前文件目录向父目录递归知道碰到下面的文件/目录
 		let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-		let g:Lf_WorkingDirectoryMode = 'Ac'
+		let g:Lf_WorkingDirectoryMode = 'a'
+		"let g:Lf_WorkingDirectoryMode = 'Ac'
 		let g:Lf_WindowHeight = 0.30
 		let g:Lf_CacheDirectory = expand('~/.vim/cache')
 
 		" 显示绝对路径
-		let g:Lf_ShowRelativePath = 0
+		let g:Lf_ShowRelativePath = 1
 
 		" 隐藏帮助
 		let g:Lf_HideHelp = 1
+
+		"悬浮搜索窗口
+		let g:Lf_WindowPosition = 'popup'
 
 		" 模糊匹配忽略扩展名
 		let g:Lf_WildIgnore = {
@@ -517,18 +535,71 @@ if index(g:bundle_group, 'leaderf') >= 0
 	endif
 endif
 
+"----------------------------------------------------------------------
+" coc.nvim：实现vscode的补全功能
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'coc') >= 0
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	" 回车自动补全
+	inoremap <silent><expr> <TAB>
+				\ pumvisible() ? "\<C-n>" :
+				\ <SID>check_back_space() ? "\<TAB>" :
+				\ coc#refresh()
+	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+	function! s:check_back_space() abort
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~# '\s'
+	endfunction
+	" Use <c-space> to trigger completion.按住ctrl + a空格可以触发自动补全
+"	if has('nvim')
+"		inoremap <silent><expr> <c-space> coc#refresh()
+"	else
+		inoremap <silent><expr> <c-space> coc#refresh()
+"	endif
+	" 使用回车，自动补全后回车换行
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+				\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	" 查看上一个或者下一个代码报错
+	nmap <silent> [g <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]g <Plug>(coc-diagnostic-next)
+	" 查看函数是在哪里定义的
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-references)
+	" 采用K显示文档
+	nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+	function! s:show_documentation()
+		if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		elseif (coc#rpc#ready())
+			call CocActionAsync('doHover')
+		else
+			execute '!' . &keywordprg . " " . expand('<cword>')
+		endif
+	endfunction
+	" 光标放在某个词词上面语法会高亮
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+	" 变量重命名
+	nmap <leader>rn <Plug>(coc-rename)
+	" Formatting selected code
+	xmap <leader>f  <Plug>(coc-format-selected)
+	nmap <leader>f  <Plug>(coc-format-selected)
+
+	let g:coc_global_extentions = ['coc-vimlsp', 'coc-clangd', 'coc-cmake']
+endif
+
 
 "----------------------------------------------------------------------
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
 
-
-
 "----------------------------------------------------------------------
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
-
 " 禁用预览功能：扰乱视听
 let g:ycm_add_preview_to_completeopt = 0
 
@@ -607,5 +678,3 @@ let g:ycm_filetype_whitelist = {
 			\ "zimbu":1,
 			\ "ps1":1,
 			\ }
-
-
