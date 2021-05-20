@@ -335,5 +335,7 @@ endif
 "basic map
 "----------------------------------------------------------------------
 noremap ; :
-noremap H 0
+noremap H ^
 noremap L $
+noremap * *zz
+inoremap jj <esc>
