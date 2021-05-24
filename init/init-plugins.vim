@@ -18,6 +18,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['coc']
+	let g:bundle_group += ['ranger']
 endif
 
 
@@ -591,6 +592,20 @@ if index(g:bundle_group, 'coc') >= 0
 	let g:coc_global_extentions = ['coc-vimlsp', 'coc-clangd', 'coc-cmake']
 endif
 
+"----------------------------------------------------------------------
+" ranger-explorer：实现vim中打开ranger的补全功能
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'ranger') >= 0
+Plug 'iberianpig/ranger-explorer.vim'
+
+let g:ranger_explorer_keymap_edit    = '<C-o>'
+let g:ranger_explorer_keymap_tabedit = '<C-t>'
+let g:ranger_explorer_keymap_split   = '<C-s>'
+let g:ranger_explorer_keymap_vsplit  = '<C-v>'
+nnoremap <silent><Leader>n :RangerOpenCurrentFile<CR>
+nnoremap <silent><Leader>c :RangerOpenCurrentDir<CR>
+nnoremap <silent><Leader>f :RangerOpenProjectRootDir<CR>
+endif
 
 "----------------------------------------------------------------------
 " 结束插件安装
