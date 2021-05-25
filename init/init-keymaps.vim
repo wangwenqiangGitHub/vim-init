@@ -341,4 +341,7 @@ noremap * *zz
 noremap # #zz
 inoremap jj <esc>
 "nnoremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
+"映射<c-g>为lazygit
 nnoremap <c-g> :tab term lazygit<CR>
+"映射<Esc>退出terminal
+tnoremap <Esc> <C-\><C-n>:bd!<CR>
