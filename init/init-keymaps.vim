@@ -340,4 +340,5 @@ noremap L $
 noremap * *zz
 noremap # #zz
 inoremap jj <esc>
-nnoremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
+"nnoremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
+nnoremap <c-g> :tab term lazygit<CR>
