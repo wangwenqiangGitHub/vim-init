@@ -19,6 +19,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['coc']
 	let g:bundle_group += ['ranger']
+	let g:bundle_group += ['floaterm']
 endif
 
 
@@ -607,6 +608,41 @@ nnoremap <silent><Leader>c :RangerOpenCurrentDir<CR>
 nnoremap <silent><Leader>f :RangerOpenProjectRootDir<CR>
 endif
 
+"----------------------------------------------------------------------
+"floaterm：实现vim中打开一个浮动窗口可以配合lazygit fzf命令行工具
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'floaterm') >= 0
+Plug 'voldikss/vim-floaterm'
+
+let g:floaterm_keymap_toggle = '<C-f>t'
+let g:floaterm_keymap_next   = '<C-f>n'
+let g:floaterm_keymap_prev   = '<C-f>p'
+let g:floaterm_keymap_new    = '<C-f>o'
+let g:floaterm_keymap_kill   = '<leader>q'
+nnoremap <silent> <C-t>g :FloatermNew --height=0.8 --width=0.8 --position=center lazygit<CR>
+" Floaterm
+"let g:floaterm_gitcommit='floaterm'
+"let g:floaterm_autoinsert=1
+"let g:floaterm_width=0.8
+"let g:floaterm_height=0.8
+"let g:floaterm_wintitle=0
+"let g:floaterm_autoclose=1
+
+"let g:which_key_map.t = {
+"      \ 'name' : '+terminal',
+"      \ ';' : [':FloatermNew --wintype=popup --height=6',                 'terminal'],
+"      \ 'f' : [':FloatermNew fzf',                                        'fzf'],
+"      \ 'g' : [':FloatermNew lazygit',                                    'git'],
+"      \ 'd' : [':FloatermNew lazydocker',                                 'docker'],
+"      \ 'n' : [':FloatermNew node',                                       'node'],
+"      \ 'p' : [':FloatermNew python',                                     'python'],
+"      \ 'j' : [':FloatermNew julia',                                      'julia'],
+"      \ 'r' : [':FloatermNew ranger',                                     'ranger'],
+"      \ 't' : [':FloatermToggle',                                         'toggle'],
+"      \ 'y' : [':FloatermNew ytop',                                       'ytop'],
+"      \ 'J' : [':FloatermNew --wintype=popup --height=6 jupyter-console', 'jupyter console'],
+"      \ }
+endif
 "----------------------------------------------------------------------
 " 结束插件安装
 "----------------------------------------------------------------------
