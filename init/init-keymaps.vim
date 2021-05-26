@@ -344,4 +344,4 @@ inoremap jj <esc>
 "映射<c-g>为lazygit
 nnoremap <c-g> :tab term lazygit<CR>
 "映射<Esc>退出terminal
-tnoremap <Esc> <C-\><C-n>:bd!<CR>
+tnoremap <leader><esc> <C-\><C-n>:bd!<CR>
