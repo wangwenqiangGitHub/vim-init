@@ -346,5 +346,17 @@ nnoremap <c-g> :tab term lazygit<CR>
 "映射<Esc>退出terminal
 tnoremap <leader><esc> <C-\><C-n>:bd!<CR>
 " 语法高亮后取消高亮
-noremap <BackSpace> :noh<cr>
+noremap <BackSpace> :noh<CR>
+" 全选当前文档
+noremap <leader>a ggvG$
+
+" 系统剪切板复制粘贴，vim使用系统剪切板需要vim支持
+" 查询可以通过 vim --version | grep clipboard 查看
+" 如果显示 +clipboard 就是支持， 如果是 -clipboard 就是不支持
+" ubuntu 可以直接安装 gui 包提供支持: sudo apt install vim-gtk
+" normal 模式下复制到系统剪切板， 这里没有 "+yy 这样只能复制一行
+
+
+
+
 

@@ -55,6 +55,15 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
+" let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+" let g:DoxygenToolkit_paramTag_pre="@Param "
+" let g:DoxygenToolkit_returnTag="@Returns   "
+" let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+" let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+" let g:DoxygenToolkit_authorName="Mathias Lorente"
+" let g:DoxygenToolkit_licenseTag="My own license"   <-- !!! Does not end with "\<enter>"
+" Doxygen注释格式生成
+Plug 'babaybus/doxygentoolkit.vim'
 
 " 多光标
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -430,32 +439,39 @@ if index(g:bundle_group, 'leaderf') >= 0
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配
-		let g:Lf_ShortcutF = '<c-p>'
+		" let g:Lf_ShortcutF = '<m-p>'
+		let g:Lf_ShortcutF = '<leader>ff'
 
 		" ALT+n 打开 buffer 模糊匹配
-		let g:Lf_ShortcutB = '<m-n>'
+		" let g:Lf_ShortcutB = '<m-n>'
 
 		" CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
-		noremap <leader>m :LeaderfMru<cr>
+		noremap <leader>fm :LeaderfMru<cr>
 
 		" ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
-		noremap <m-p> :LeaderfFunction!<cr>
+		" noremap <m-p> :LeaderfFunction!<cr>
 
 		" ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
-		noremap <m-P> :LeaderfBufTag!<cr>
+		" noremap <m-P> :LeaderfBufTag!<cr>
 
 		" ALT+n 打开 buffer 列表进行模糊匹配
-		noremap <m-n> :LeaderfBuffer<cr>
+		" noremap <m-n> :LeaderfBuffer<cr>
 
 		" ALT+m 全局 tags 模糊匹配
-		noremap <m-m> :LeaderfTag<cr>
-
+		" noremap <m-m> :LeaderfTag<cr>
+		noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+		noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+		noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+		noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+		" noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
+		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<CR><CR>
+		noremap <leader>fe :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 		"整个工程搜索字段
-		noremap <m-b> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<cr><cr>
-		noremap <m-f> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<cr><cr>
+		" noremap <m-b> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<cr><cr>
+		" noremap <m-f> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<cr><cr>
 		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<cr>
 		"search word under cursor in *.h and *.cpp files.
-		noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,cpp}", expand("<cword>"))<cr><cr>
+		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,cpp}", expand("<cword>"))<cr><cr>
 
 		" 最大历史文件保存 2048 个
 		let g:Lf_MruMaxFiles = 2048
@@ -563,15 +579,15 @@ if index(g:bundle_group, 'coc') >= 0
 	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 				\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 	" 查看上一个或者下一个代码报错
-	nmap <silent> [g <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]g <Plug>(coc-diagnostic-next)
+	nmap <silent>[g <Plug>(coc-diagnostic-prev)
+	nmap <silent>]g <Plug>(coc-diagnostic-next)
 	" 查看函数是在哪里定义的
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gy <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references)
+	nmap <silent>gd <Plug>(coc-definition)
+	nmap <silent>gy <Plug>(coc-type-definition)
+	nmap <silent>gi <Plug>(coc-implementation)
+	nmap <silent>gr <Plug>(coc-references)
 	" 采用K显示文档
-	nnoremap <silent> K :call <SID>show_documentation()<CR>
+	nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 	function! s:show_documentation()
 		if (index(['vim','help'], &filetype) >= 0)
