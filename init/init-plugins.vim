@@ -15,13 +15,14 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
+	let g:bundle_group += ['tags', 'airline', 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['coc', 'go']
 	let g:bundle_group += ['ranger']
 	let g:bundle_group += ['floaterm']
 endif
-
+" 已经不使用nerdtree插件
+" 已经不使用defx插件'nerdtree', 'defx',
 
 "----------------------------------------------------------------------
 " 计算当前 vim-init 的子路径
@@ -64,6 +65,7 @@ Plug 'chrisbra/vim-diff-enhanced'
 " let g:DoxygenToolkit_licenseTag="My own license"   <-- !!! Does not end with "\<enter>"
 " Doxygen注释格式生成
 Plug 'babaybus/doxygentoolkit.vim'
+let g:DoxygenToolkit_authorName="Wangwenqiang"
 
 " 多光标
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -335,7 +337,33 @@ if index(g:bundle_group, 'nerdtree') >= 0
 	noremap <space>nt :NERDTreeToggle<cr>
 endif
 
+"----------------------------------------------------------------------
+" defx
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'defx') >= 0
+	if has('nvim')
+		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+	else
+		Plug 'Shougo/defx.nvim'
+		Plug 'roxma/nvim-yarp'
+		Plug 'roxma/vim-hug-neovim-rpc'
+	endif
 
+	let g:defx_icons_enable_syntax_highlight = 1
+	" 开关快捷键,【-search=`expand('%:p')`】表示打开defx树后，光标自动放在当前buffer上
+	nmap <silent>e :Defx  -search=`expand('%:p')` -toggle <cr>
+	"打开vim自动打开defx
+	func! ArgFunc() abort
+		let s:arg = argv(0)
+		if isdirectory(s:arg)
+			return s:arg
+		else
+			return fnamemodify(s:arg, ':h')
+		endif
+	endfunc
+
+
+endif
 "----------------------------------------------------------------------
 " LanguageTool 语法检查
 "----------------------------------------------------------------------
@@ -605,12 +633,15 @@ if index(g:bundle_group, 'coc') >= 0
 	" Formatting selected code
 	xmap <leader>f  <Plug>(coc-format-selected)
 	nmap <leader>f  <Plug>(coc-format-selected)
+	" coc-explorer设置
+	nmap tt :CocCommand explorer<CR>
 
 	let g:coc_global_extensions = [
 				\ 'coc-vimlsp',
 				\ 'coc-diagnostic',
-				\ 'coc-clangd',
+				\ 'coc-explorer',
 				\ 'coc-yank',
+				\ 'coc-clangd',
 				\ 'coc-snippets',
 				\ 'coc-go',
 				\ 'coc-cmake']
@@ -666,9 +697,9 @@ let g:ranger_explorer_keymap_edit    = '<C-o>'
 let g:ranger_explorer_keymap_tabedit = '<C-t>'
 let g:ranger_explorer_keymap_split   = '<C-s>'
 let g:ranger_explorer_keymap_vsplit  = '<C-v>'
-nnoremap <silent><Leader>n :RangerOpenCurrentFile<CR>
-nnoremap <silent><Leader>c :RangerOpenCurrentDir<CR>
-nnoremap <silent><Leader>f :RangerOpenProjectRootDir<CR>
+nnoremap <silent><Leader>rf :RangerOpenCurrentFile<CR>
+nnoremap <silent><Leader>rd :RangerOpenCurrentDir<CR>
+nnoremap <silent><Leader>rr :RangerOpenProjectRootDir<CR>
 endif
 
 "----------------------------------------------------------------------

@@ -180,7 +180,7 @@ set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
 
 
 " Compile function
-noremap r :call CompileRunGcc()<CR>
+noremap <leader>ar :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
