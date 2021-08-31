@@ -356,6 +356,7 @@ noremap <leader>a ggvG$
 " ubuntu 可以直接安装 gui 包提供支持: sudo apt install vim-gtk
 " normal 模式下复制到系统剪切板， 这里没有 "+yy 这样只能复制一行
 
+noremap <leader>gcc :set commentstring=//\ %s<cr>
 
 
 

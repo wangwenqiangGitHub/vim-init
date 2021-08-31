@@ -70,6 +70,17 @@ Plug 'chrisbra/vim-diff-enhanced'
 Plug 'babaybus/doxygentoolkit.vim'
 let g:DoxygenToolkit_authorName="Wangwenqiang"
 
+Plug 'liuchengxu/vista.vim'
+noremap <LEADER>v :Vista!!<CR>
+noremap <c-t> :silent! Vista finder coc<CR>
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+			\   "function": "\uf794",
+			\   "variable": "\uf71b",
+			\  }
 " 多光标
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 let g:VM_maps = {}
@@ -671,7 +682,6 @@ if index(g:bundle_group, 'coc') >= 0
 
 	let g:coc_global_extensions = [
 				\ 'coc-vimlsp',
-				\ 'coc-diagnostic',
 				\ 'coc-explorer',
 				\ 'coc-yank',
 				\ 'coc-clangd',
@@ -679,7 +689,7 @@ if index(g:bundle_group, 'coc') >= 0
 				\ 'coc-go',
 				\ 'coc-cmake']
 endif
-
+" \ 'coc-diagnostic',
 "----------------------------------------------------------------------
 " vim-go：实现vim中go语言的补全功能
 "----------------------------------------------------------------------
