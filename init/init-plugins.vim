@@ -501,7 +501,7 @@ if index(g:bundle_group, 'echodoc') >= 0
 	let g:echodoc#enable_at_startup = 1
 endif
 
-
+let g:mapleader=" "
 "----------------------------------------------------------------------
 " LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
