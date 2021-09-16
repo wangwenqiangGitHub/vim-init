@@ -334,6 +334,7 @@ endif
 "----------------------------------------------------------------------
 "basic map
 "----------------------------------------------------------------------
+let g:mapleader=" "
 noremap ; :
 noremap H ^
 noremap L $
@@ -357,7 +358,3 @@ noremap <leader>a ggvG$
 " normal 模式下复制到系统剪切板， 这里没有 "+yy 这样只能复制一行
 
 noremap <leader>gcc :set commentstring=//\ %s<cr>
-
-
-
-
