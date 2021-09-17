@@ -740,9 +740,9 @@ let g:ranger_explorer_keymap_edit    = '<C-o>'
 let g:ranger_explorer_keymap_tabedit = '<C-t>'
 let g:ranger_explorer_keymap_split   = '<C-s>'
 let g:ranger_explorer_keymap_vsplit  = '<C-v>'
-nnoremap <silent><Leader>rf :RangerOpenCurrentFile<CR>
-nnoremap <silent><Leader>rd :RangerOpenCurrentDir<CR>
-nnoremap <silent><Leader>rr :RangerOpenProjectRootDir<CR>
+" nnoremap <silent><Leader>rf :RangerOpenCurrentFile<CR>
+nnoremap <silent><Leader>rc :RangerOpenCurrentDir<CR>
+nnoremap <silent><Leader>rp :RangerOpenProjectRootDir<CR>
 endif
 
 "----------------------------------------------------------------------
