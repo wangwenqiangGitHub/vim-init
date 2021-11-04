@@ -527,6 +527,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 
 		" ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
 		" noremap <m-p> :LeaderfFunction!<cr>
+		noremap <leader>fo :LeaderfFunction!<cr>
 
 		" ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
 		" noremap <m-P> :LeaderfBufTag!<cr>
@@ -540,13 +541,21 @@ if index(g:bundle_group, 'leaderf') >= 0
 		noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 		noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 		noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+		xnoremap <leader>fv :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+		noremap <leader>fc :<C-U>Leaderf! rg --recall<CR>
+		" noremap <leader>fc :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+		" noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+		" noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 		" noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
 		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<CR><CR>
 		noremap <leader>fe :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 		"整个工程搜索字段
 		" noremap <m-b> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<cr><cr>
 		" noremap <m-f> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<cr><cr>
-		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<cr>
+		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<cr>
+		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<cr>
+		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", "")<cr>
 		"search word under cursor in *.h and *.cpp files.
 		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,cpp,cc}", expand("<cword>"))<cr><cr>
 
