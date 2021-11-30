@@ -45,6 +45,33 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 " 默认插件 
 "----------------------------------------------------------------------
 
+"编译
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+let g:asyncrun_open = 20
+let g:asynctasks_term_rows = 20    " set height for the horizontal terminal split
+let g:asynctasks_term_cols = 80    " set width for vertical terminal split
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.hg']
+" let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
+let g:asynctasks_term_pos = 'bottom'
+" let g:asynctasks_term_pos = 'tab'
+" let g:asynctasks_config_name = '.asynctask'
+let g:asynctasks_config_name = '.git/tasks.ini'
+let g:asynctask_template = '~/.vim/task_template.ini'
+let g:asynctasks_extra_config = [
+    \ '~/.vim/task_template.ini',
+    \ '',
+    \ ]
+noremap <space>te :AsyncTaskEdit<cr>
+noremap <space>tg :AsyncTaskEdit!<cr>
+noremap <space>tfb :AsyncTask file-build<cr>
+noremap <space>tfr :AsyncTask file-run<cr>
+noremap <space>tfd :AsyncTask file-debug<cr>
+noremap <space>tpi :AsyncTask project-init<cr>
+noremap <space>tpb :AsyncTask project-build<cr>
+noremap <space>tpr :AsyncTask project-run<cr>
+noremap <space>tpd :AsyncTask project-debug<cr>
+
 "自动补全
 Plug 'wellle/tmux-complete.vim'
 
