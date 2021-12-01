@@ -18,7 +18,7 @@ endif
 let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " 定义一个命令用来加载文件
-command! -nargs=1 LoadScript exec 'so '.s:home.'/'.'<args>'
+command! -nargs=1 IncScript exec 'so '.s:home.'/'.'<args>'
 
 " 将 vim-init 目录加入 runtimepath
 exec 'set rtp+='.s:home
@@ -32,22 +32,23 @@ set rtp+=~/.vim
 "----------------------------------------------------------------------
 
 " 加载基础配置
-LoadScript init/init-basic.vim
-
-" 加载扩展配置
-LoadScript init/init-config.vim
+IncScript init/init-basic.vim
 
 " 设定 tabsize
-LoadScript init/init-tabsize.vim
-
-" 插件加载
-LoadScript init/init-plugins.vim
+IncScript init/init-tabsize.vim
 
 " 界面样式
-LoadScript init/init-style.vim
+IncScript init/init-style.vim
 
 " 自定义按键
-LoadScript init/init-keymaps.vim
+IncScript init/init-keymaps.vim
 
 " 注释
-LoadScript init/misc.vim
+IncScript init/misc.vim
+
+" 加载扩展配置
+IncScript init/init-config.vim
+
+" 插件加载
+IncScript init/init-plugins.vim
+
