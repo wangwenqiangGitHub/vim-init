@@ -202,6 +202,23 @@ inoremap <m-L> <esc><c-w>l
 inoremap <m-J> <esc><c-w>j
 inoremap <m-K> <esc><c-w>k
 
+" window management
+noremap <tab>h <c-w>h
+noremap <tab>j <c-w>j
+noremap <tab>k <c-w>k
+noremap <tab>l <c-w>l
+noremap <tab>w <c-w>w
+noremap <tab>c <c-w>c
+noremap <tab>+ <c-w>+
+noremap <tab>- <c-w>-
+noremap <tab>, <c-w><
+noremap <tab>. <c-w>>
+noremap <tab>= <c-w>=
+noremap <tab>s <c-w>s
+noremap <tab>v <c-w>v
+noremap <tab>o <c-w>o
+noremap <tab>p <c-w>p
+
 if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
 	" vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式
 	" 设置 termwinkey 为 CTRL 加减号（GVIM），有些终端下是 CTRL+?
@@ -335,7 +352,7 @@ endif
 "basic map
 "----------------------------------------------------------------------
 let g:mapleader=" "
-" noremap ; :
+noremap ; :
 noremap H ^
 noremap L $
 noremap * *zz

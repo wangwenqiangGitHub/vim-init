@@ -120,6 +120,25 @@ let g:VM_maps["Add Cursor Down"]    = '<m-j>'   " new cursor down
 let g:VM_maps["Add Cursor Up"]      = '<m-k>'   " new cursor up
 
 " markdown 如果有问题需要运行(失败运行几次) :call mkdp#util#install()
+" Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
+" Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
+" Plug 'dkarter/bullets.vim'
+" === Markdown Settings
+" Snippets
+source ~/.vim/vim-init/init/md-snippets.vim
+
+" ===
+" === vim-instant-markdown
+" ===
+" let g:instant_markdown_slow = 0
+" let g:instant_markdown_autostart = 0
+" let g:instant_markdown_open_to_the_world = 1
+" let g:instant_markdown_allow_unsafe_content = 1
+" let g:instant_markdown_allow_external_content = 0
+" let g:instant_markdown_mathjax = 1
+" let g:instant_markdown_autoscroll = 1
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
