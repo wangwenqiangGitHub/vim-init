@@ -80,6 +80,10 @@ Plug 'wellle/tmux-complete.vim'
 
 " 全文快速移动，<leader><leader>f{char} 即可触发
 Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
+let g:EasyMotion_keys = 'fjdksweoavn'
 
 " 文件浏览器，代替 netrw
 Plug 'justinmk/vim-dirvish'
@@ -606,7 +610,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<cr>
 		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", "")<cr>
 		"search word under cursor in *.h and *.cpp files.
-		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,cpp,cc}", expand("<cword>"))<cr><cr>
+		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,hpp,cpp,cc}", expand("<cword>"))<cr><cr>
 
 		" 最大历史文件保存 2048 个
 		let g:Lf_MruMaxFiles = 2048
@@ -632,7 +636,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 
 		" 模糊匹配忽略扩展名
 		let g:Lf_WildIgnore = {
-					\ 'dir': ['.svn','.git','.hg'],
+					\ 'dir': ['.svn','.git','.hg','build','.cache','Debug'],
 					\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
 					\ }
 
@@ -694,6 +698,7 @@ set updatetime=100
 " coc.nvim：实现vscode的补全功能
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'coc') >= 0
+	" Plug 'https://github.com/ycm-core/YouCompleteMe'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	" 回车自动补全
 	inoremap <silent><expr> <TAB>
@@ -721,7 +726,7 @@ if index(g:bundle_group, 'coc') >= 0
 	" 查看函数是在哪里定义的
 	nmap <silent>gd <Plug>(coc-definition)
 	nmap <silent>gy <Plug>(coc-type-definition)
-	nmap <silent>gi <Plug>(coc-implementation)
+	" nmap <silent>gi <Plug>(coc-implementation)
 	nmap <silent>gr <Plug>(coc-references)
 	" 采用K显示文档
 	nnoremap <silent>K :call <SID>show_documentation()<CR>
@@ -854,6 +859,7 @@ call plug#end()
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
 " 禁用预览功能：扰乱视听
+" let g:ycm_global_ycm_extra_conf = '~/ycm_extra_conf.py'
 let g:ycm_add_preview_to_completeopt = 0
 
 " 禁用诊断功能：我们用前面更好用的 ALE 代替
