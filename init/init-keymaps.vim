@@ -134,13 +134,24 @@ noremap <silent> <leader>bp :bp<cr>
 " 其实还可以用原生的 CTRL+PageUp, CTRL+PageDown 来切换标签
 "----------------------------------------------------------------------
 
-noremap <silent> <leader>tc :tabnew<cr>
-noremap <silent> <leader>tq :tabclose<cr>
-noremap <silent> <leader>tn :tabnext<cr>
-noremap <silent> <leader>tp :tabprev<cr>
-noremap <silent> <leader>to :tabonly<cr>
+"noremap <silent> <leader>tc :tabnew<cr>
+"noremap <silent> <leader>tq :tabclose<cr>
+"noremap <silent> <leader>tn :tabnext<cr>
+"noremap <silent> <leader>tp :tabprev<cr>
+"noremap <silent> <leader>to :tabonly<cr>
+" Tabs
+nnoremap <silent> g1 :<C-u>tabfirst<CR>
+nnoremap <silent> g5 :<C-u>tabprevious<CR>
+nnoremap <silent> g9 :<C-u>tablast<CR>
+"nnoremap <silent> <C-Tab> :<C-U>tabnext<CR>
+"nnoremap <silent> <C-S-Tab> :<C-U>tabprevious<CR>
+nnoremap <silent> <A-{> :<C-u>tabnext<CR>
+nnoremap <silent> <A-}> :<C-u>tabprevious<CR>
+nnoremap <silent> <A-n> :<C-u>tabnew<CR>
+nnoremap <silent> <A-o> :tabonly<cr>
 
-
+noremap <silent><tab>, :call Tab_MoveLeft()<cr>
+noremap <silent><tab>. :call Tab_MoveRight()<cr>
 " 左移 tab
 function! Tab_MoveLeft()
 	let l:tabnr = tabpagenr() - 2
@@ -157,8 +168,6 @@ function! Tab_MoveRight()
 	endif
 endfunc
 
-noremap <silent><leader>tl :call Tab_MoveLeft()<cr>
-noremap <silent><leader>tr :call Tab_MoveRight()<cr>
 noremap <silent><m-left> :call Tab_MoveLeft()<cr>
 noremap <silent><m-right> :call Tab_MoveRight()<cr>
 
@@ -174,8 +183,9 @@ inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
 
 " ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转） 
-noremap <m-j> gj
-noremap <m-k> gk
+" 目前多行编辑占用
+" noremap <m-j> gj
+" noremap <m-k> gk
 inoremap <m-j> <c-\><c-o>gj
 inoremap <m-k> <c-\><c-o>gk
 
@@ -379,3 +389,142 @@ noremap <leader>gcc :set commentstring=//\ %s<cr>
 nnoremap ! :!
 nmap <Leader><Leader> V
 vmap <Leader><Leader> <Esc>
+nmap <leader>m %
+
+" Toggle fold
+nnoremap <CR> za
+" Focus the current fold by closing all others
+nnoremap <S-Return> zMzvzt
+
+nnoremap Y y$
+" Duplicate lines
+nnoremap <Leader>d m`YP`
+vnoremap <Leader>d YPgv`
+
+nnoremap <Leader>cn *``cgn
+nnoremap <Leader>cN *``cgN
+
+" Change selected word in a repeatable manner
+vnoremap <expr> <Leader>cn "y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgn"
+vnoremap <expr> <Leader>cN "y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgN"
+
+" Duplicate paragraph
+nnoremap <Leader>cp yap<S-}>p
+
+" Easier line-wise movement
+nnoremap gh g^
+nnoremap gl g$
+
+" Scroll step sideways
+nnoremap zl z4l
+nnoremap zh z4h
+
+
+" Start new line from any cursor position in insert-mode
+inoremap <S-Return> <C-o>o
+
+" Deletes selection and start insert mode
+" vnoremap <BS> "_xi
+
+" Re-select blocks after indenting in visual/select mode
+xnoremap < <gv
+xnoremap > >gv|
+
+" Use tab for indenting in visual/select mode
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
+
+" Indent and jump to first non-blank character linewise
+nmap >>  >>_
+nmap <<  <<_
+
+" Drag current line/s vertically and auto-indent
+nnoremap <Leader>k :m-2<CR>==
+nnoremap <Leader>j :m+<CR>==
+vnoremap <Leader>k :m'<-2<CR>gv=gv
+vnoremap <Leader>j :m'>+<CR>gv=gv
+
+"----------------------------------------------------------------------
+"  设置window
+"----------------------------------------------------------------------
+
+" Window-control prefix
+nnoremap  [Window]   <Nop>
+nmap      s [Window]
+
+nnoremap <silent> [Window]v  :<C-u>split<CR>
+nnoremap <silent> [Window]g  :<C-u>vsplit<CR>
+nnoremap <silent> [Window]t  :tabnew<CR>
+nnoremap <silent> [Window]o  :<C-u>only<CR>
+nnoremap <silent> [Window]b  :b#<CR>
+nnoremap <silent> [Window]c  :close<CR>
+nnoremap <silent> [Window]x  :<C-u>call <SID>window_empty_buffer()<CR>
+nnoremap <silent> [Window]z  :<C-u>call <SID>zoom()<CR>
+
+function! s:toggle_background()
+	if ! exists('g:colors_name')
+		echomsg 'No colorscheme set'
+		return
+	endif
+	let l:scheme = g:colors_name
+
+	if l:scheme =~# 'dark' || l:scheme =~# 'light'
+		" Rotate between different theme backgrounds
+		execute 'colorscheme' (l:scheme =~# 'dark'
+					\ ? substitute(l:scheme, 'dark', 'light', '')
+					\ : substitute(l:scheme, 'light', 'dark', ''))
+	else
+		execute 'set background='.(&background ==# 'dark' ? 'light' : 'dark')
+		if ! exists('g:colors_name')
+			execute 'colorscheme' l:scheme
+			echomsg 'The colorscheme `'.l:scheme
+				\ .'` doesn''t have background variants!'
+		else
+			echo 'Set colorscheme to '.&background.' mode'
+		endif
+	endif
+endfunction
+
+function! s:toggle_contrast(delta)
+	let l:scheme = ''
+	if g:colors_name =~# 'solarized8'
+		let l:schemes = map(['_low', '_flat', '', '_high'],
+			\ '"solarized8_".(&background).v:val')
+		let l:contrast = ((a:delta + index(l:schemes, g:colors_name)) % 4 + 4) % 4
+		let l:scheme = l:schemes[l:contrast]
+	endif
+	if l:scheme !=# ''
+		execute 'colorscheme' l:scheme
+	endif
+endfunction
+
+function! s:window_empty_buffer()
+	let l:current = bufnr('%')
+	if ! getbufvar(l:current, '&modified')
+		enew
+		silent! execute 'bdelete '.l:current
+	endif
+endfunction
+
+" Simple zoom toggle
+function! s:zoom()
+	if exists('t:zoomed')
+		unlet t:zoomed
+		wincmd =
+	else
+		let t:zoomed = { 'nr': bufnr('%') }
+		vertical resize
+		resize
+		normal! ze
+	endif
+endfunction
+
+
+"----------------------------------------------------------------------
+" 主要实现左右两个屏幕写东西，左边是参考，右边是实际写的内容
+" 通过右边窗口操作左边窗口的移动
+"----------------------------------------------------------------------
+noremap <m-u> <c-w>p<c-u><c-w>p
+noremap <m-d> <c-w>p<c-d><c-w>p
+inoremap <m-u> <esc><c-w>p<c-u><c-w>p
+inoremap <m-d> <esc><c-w>p<c-d><c-w>p

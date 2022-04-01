@@ -745,8 +745,8 @@ if index(g:bundle_group, 'coc') >= 0
 	" 变量重命名
 	nmap <leader>rn <Plug>(coc-rename)
 	" Formatting selected code
-	xmap <leader>f  <Plug>(coc-format-selected)
-	nmap <leader>f  <Plug>(coc-format-selected)
+	"xmap <leader>cf  <Plug>(coc-format-selected)
+	"nmap <leader>cf  <Plug>(coc-format-selected)
 	" coc-explorer设置
 	nmap tt :CocCommand explorer<CR>
 
