@@ -528,3 +528,5 @@ noremap <m-u> <c-w>p<c-u><c-w>p
 noremap <m-d> <c-w>p<c-d><c-w>p
 inoremap <m-u> <esc><c-w>p<c-u><c-w>p
 inoremap <m-d> <esc><c-w>p<c-d><c-w>p
+
+noremap tx :r !figlet
