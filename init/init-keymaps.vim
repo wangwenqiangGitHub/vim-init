@@ -451,14 +451,21 @@ vnoremap <Leader>j :m'>+<CR>gv=gv
 " Window-control prefix
 nnoremap  [Window]   <Nop>
 nmap      s [Window]
-
+" sv是当前页面新打开一个上下布局的窗口
 nnoremap <silent> [Window]v  :<C-u>split<CR>
+" sg是当前页面新打开一个左右布局的窗口
 nnoremap <silent> [Window]g  :<C-u>vsplit<CR>
+" st是新建一个标签页
 nnoremap <silent> [Window]t  :tabnew<CR>
+" so是只保存当前窗口
 nnoremap <silent> [Window]o  :<C-u>only<CR>
+" sb是最近打开的窗口进行切换
 nnoremap <silent> [Window]b  :b#<CR>
+" sc关闭当前窗口
 nnoremap <silent> [Window]c  :close<CR>
+" sx一个空白的窗口
 nnoremap <silent> [Window]x  :<C-u>call <SID>window_empty_buffer()<CR>
+" sz是最大化当前窗口哦
 nnoremap <silent> [Window]z  :<C-u>call <SID>zoom()<CR>
 
 function! s:toggle_background()
