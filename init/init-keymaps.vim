@@ -528,3 +528,22 @@ noremap <m-u> <c-w>p<c-u><c-w>p
 noremap <m-d> <c-w>p<c-d><c-w>p
 inoremap <m-u> <esc><c-w>p<c-u><c-w>p
 inoremap <m-d> <esc><c-w>p<c-d><c-w>p
+
+
+"设置（自动补全）功能
+inoremap " ""<ESC>i
+inoremap ' ''<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>o
+inoremap < <><ESC>i
+"跳出补全的）和“号
+func SkipPair()
+		if getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '}' || getline('.')[col('.') - 1] == '>' || getline('.')[col('.') - 1] == "'"
+		    return "\<ESC>la"
+		else
+				return "\t"
+		endif
+endfunc
+inoremap kk <c-r>=SkipPair()<CR>
+
