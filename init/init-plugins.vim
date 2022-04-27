@@ -571,6 +571,8 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" CTRL+p 打开文件模糊匹配
 		" let g:Lf_ShortcutF = '<m-p>'
 		let g:Lf_ShortcutF = '<leader>ff'
+		" 解决.gitignore中编写的文件自动过滤问题。
+		map <leader>ff :Leaderf file --no-ignore<CR>
 
 		" ALT+n 打开 buffer 模糊匹配
 		" let g:Lf_ShortcutB = '<m-n>'
@@ -756,10 +758,17 @@ if index(g:bundle_group, 'coc') >= 0
 				\ 'coc-yank',
 				\ 'coc-clangd',
 				\ 'coc-snippets',
-				\ 'coc-go',
+				\ 'coc-snippets',
 				\ 'coc-cmake']
+	" coc-snippets
+	imap <C-l> <Plug>(coc-snippets-expand)
+	vmap <C-j> <Plug>(coc-snippets-select)
+	let g:coc_snippet_next = '<c-j>'
+	let g:coc_snippet_prev = '<c-k>'
+	imap <C-j> <Plug>(coc-snippets-expand-jump)
 endif
 " \ 'coc-diagnostic',
+" \ 'coc-go',
 "----------------------------------------------------------------------
 " vim-go：实现vim中go语言的补全功能
 "----------------------------------------------------------------------
