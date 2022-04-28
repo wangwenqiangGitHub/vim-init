@@ -30,14 +30,15 @@ inoremap <c-_> <c-k>
 " 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
 " 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
-noremap <C-h> <left>
-noremap <C-j> <down>
-noremap <C-k> <up>
-noremap <C-l> <right>
-inoremap <C-h> <left>
-inoremap <C-j> <down>
-inoremap <C-k> <up>
-inoremap <C-l> <right>
+" 与snipts快捷键冲突
+" noremap <C-h> <left>
+" noremap <C-j> <down>
+" noremap <C-k> <up>
+" noremap <C-l> <right>
+" inoremap <C-h> <left>
+" inoremap <C-j> <down>
+" inoremap <C-k> <up>
+" inoremap <C-l> <right>
 
 
 "----------------------------------------------------------------------
@@ -431,6 +432,7 @@ xnoremap < <gv
 xnoremap > >gv|
 
 " Use tab for indenting in visual/select mode
+" 按下tabale按键和shift table按键缩进
 xnoremap <Tab> >gv|
 xnoremap <S-Tab> <gv
 
@@ -537,3 +539,8 @@ inoremap <m-u> <esc><c-w>p<c-u><c-w>p
 inoremap <m-d> <esc><c-w>p<c-d><c-w>p
 
 noremap tx :r !figlet
+
+" find and replace
+noremap \s :%s//g<left><left>
+" 折行显示
+noremap <LEADER>sw :set wrap<CR>
