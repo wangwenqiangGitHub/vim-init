@@ -144,7 +144,12 @@ source ~/.vim/vim-init/init/md-snippets.vim
 " let g:instant_markdown_autoscroll = 1
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" let g:mkdp_path_to_chrome='/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome'
+" 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
+" markdown 文件的时候打开一次
 let g:mkdp_auto_start = 0
+" 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不
+" 自动关闭预览窗口
 let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
