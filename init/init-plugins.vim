@@ -617,7 +617,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<cr>
 		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", "")<cr>
 		"search word under cursor in *.h and *.cpp files.
-		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,hpp,cpp,cc}", expand("<cword>"))<cr><cr>
+		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,hpp,cpp,cc,c} ", expand("<cword>"))<cr><cr>
 
 		" 最大历史文件保存 2048 个
 		let g:Lf_MruMaxFiles = 2048
