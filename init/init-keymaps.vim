@@ -550,7 +550,8 @@ inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
-inoremap { {<CR>}<ESC>o
+" inoremap { {<CR>}<ESC>o
+inoremap { {}<ESC>i
 inoremap < <><ESC>i
 "跳出补全的）和“号
 func SkipPair()
