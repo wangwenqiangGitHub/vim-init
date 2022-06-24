@@ -470,6 +470,17 @@ nnoremap <silent> [Window]x  :<C-u>call <SID>window_empty_buffer()<CR>
 " sz是最大化当前窗口哦
 nnoremap <silent> [Window]z  :<C-u>call <SID>zoom()<CR>
 
+" 移动当前窗口到最 上、下、左、右
+noremap <silent> sK <C-W>K
+noremap <silent> sJ <C-W>J
+noremap <silent> sH <C-W>H
+noremap <silent> sL <C-W>L
+" 光标进入 上、下、左、右 的窗口
+noremap <silent> sk <C-W>k
+noremap <silent> sj <C-W>j
+noremap <silent> sh <C-W>h
+noremap <silent> sl <C-W>l
+
 function! s:toggle_background()
 	if ! exists('g:colors_name')
 		echomsg 'No colorscheme set'
