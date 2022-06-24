@@ -46,9 +46,10 @@ IncScript init/init-keymaps.vim
 " 注释
 IncScript init/misc.vim
 
-" 加载扩展配置
-IncScript init/init-config.vim
 
 " 插件加载
 IncScript init/init-plugins.vim
+" 加载扩展配置
+IncScript init/init-config.vim
 
+" au FileType c,cpp setlocal commentstring=//\ %s

@@ -762,6 +762,7 @@ if index(g:bundle_group, 'coc') >= 0
 				\ 'coc-explorer',
 				\ 'coc-yank',
 				\ 'coc-clangd',
+				\ 'coc-pyright',
 				\ 'coc-snippets',
 				\ 'coc-snippets',
 				\ 'coc-cmake']

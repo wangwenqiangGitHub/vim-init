@@ -563,3 +563,8 @@ func SkipPair()
 endfunc
 inoremap kk <c-r>=SkipPair()<CR>
 
+inoremap <M-x> <Del>
+inoremap <M-X> <BS>
+" switch 2 words
+" ----------------------
+xnoremap <M-V> <C-c>`.``gvp``P
