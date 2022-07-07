@@ -23,6 +23,7 @@ if !exists('g:bundle_group')
 endif
 " 已经不使用nerdtree插件
 " 已经不使用defx插件'nerdtree', 'defx',
+" tags去除gtags;使用；leaderf
 
 "----------------------------------------------------------------------
 " 计算当前 vim-init 的子路径
@@ -346,6 +347,8 @@ if index(g:bundle_group, 'tags') >= 0
 
 	" 禁止 gutentags 自动链接 gtags 数据库
 	let g:gutentags_auto_add_gtags_cscope = 0
+	" 打开日志
+	" let g:gutentags_define_advanced_commands = 1
 endif
 
 
@@ -634,6 +637,9 @@ if index(g:bundle_group, 'leaderf') >= 0
 
 		" 显示绝对路径
 		let g:Lf_ShowRelativePath = 1
+		" LeaderF 可以自己管理 gtags 数据库它不会在你的项目目录下生成任何额外的文件或目录。gtags 数据库文件存储在$HOME/.LfCache/gtags/%PATH%OF%YOUR%PROJECT/下面
+		" %PATH%OF%YOUR%PROJECT 是把你项目路径中的 \ 或 / 替换成 %
+		let g:Lf_GtagsAutoGenerate = 1
 
 		" 隐藏帮助
 		let g:Lf_HideHelp = 1
