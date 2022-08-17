@@ -317,35 +317,35 @@ if index(g:bundle_group, 'tags') >= 0
 
 	" 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
 	let g:gutentags_project_root = ['.root ', '.svn', '.git', '.hg', '.project']
-	let g:gutentags_ctags_tagfile = '.tags'
+	" let g:gutentags_ctags_tagfile = '.tags'
 
 	" 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
 	let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 	" 默认禁用自动生成
-	let g:gutentags_modules = [] 
+	" let g:gutentags_modules = [] 
 
 	" 如果有 ctags 可执行就允许动态生成 ctags 文件
-	if executable('ctags')
-		let g:gutentags_modules += ['ctags']
-	endif
+	" if executable('ctags')
+	" 	let g:gutentags_modules += ['ctags']
+	" endif
 
 	" 如果有 gtags 可执行就允许动态生成 gtags 数据库
-	if executable('gtags') && executable('gtags-cscope')
-		let g:gutentags_modules += ['gtags_cscope']
-	endif
+	" if executable('gtags') && executable('gtags-cscope')
+	" 	let g:gutentags_modules += ['gtags_cscope']
+	" endif
 
 	" 设置 ctags 的参数
-	let g:gutentags_ctags_extra_args = []
-	let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-	let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-	let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+	" let g:gutentags_ctags_extra_args = []
+	" let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+	" let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+	" let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 	" 使用 universal-ctags 的话需要下面这行，请反注释
 	" let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 	" 禁止 gutentags 自动链接 gtags 数据库
-	let g:gutentags_auto_add_gtags_cscope = 0
+	" let g:gutentags_auto_add_gtags_cscope = 0
 endif
 
 
@@ -709,15 +709,20 @@ if index(g:bundle_group, 'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	" 回车自动补全
 	inoremap <silent><expr> <TAB>
-				\ pumvisible() ? "\<C-n>" :
-				\ <SID>check_back_space() ? "\<TAB>" :
-				\ coc#refresh()
-	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+	inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-	function! s:check_back_space() abort
+	" Make <CR> to accept selected completion item or notify coc.nvim to format
+	" <C-g>u breaks current undo, please make your own choice.
+	inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+				\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	function! CheckBackspace() abort
 		let col = col('.') - 1
 		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
+
 	" Use <c-space> to trigger completion.按住ctrl + a空格可以触发自动补全
 "	if has('nvim')
 "		inoremap <silent><expr> <c-space> coc#refresh()
@@ -725,8 +730,6 @@ if index(g:bundle_group, 'coc') >= 0
 		inoremap <silent><expr> <c-space> coc#refresh()
 "	endif
 	" 使用回车，自动补全后回车换行
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-				\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 	" 查看上一个或者下一个代码报错
 	nmap <silent>[g <Plug>(coc-diagnostic-prev)
 	nmap <silent>]g <Plug>(coc-diagnostic-next)
