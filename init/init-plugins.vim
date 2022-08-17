@@ -310,18 +310,18 @@ endif
 if index(g:bundle_group, 'tags') >= 0
 
 	" 提供 ctags/gtags 后台数据库自动更新功能
-	Plug 'ludovicchabant/vim-gutentags'
+	" Plug 'ludovicchabant/vim-gutentags'
 
 	" 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
 	" 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
-	Plug 'skywind3000/gutentags_plus'
+	" Plug 'skywind3000/gutentags_plus'
 
 	" 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-	let g:gutentags_project_root = ['.root ', '.svn', '.git', '.hg', '.project']
+	" let g:gutentags_project_root = ['.root ', '.svn', '.git', '.hg', '.project']
 	" let g:gutentags_ctags_tagfile = '.tags'
 
 	" 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
-	let g:gutentags_cache_dir = expand('~/.cache/tags')
+	" let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 	" 默认禁用自动生成
 	" let g:gutentags_modules = [] 
