@@ -557,13 +557,13 @@ noremap \s :%s//g<left><left>
 noremap <LEADER>sw :set wrap<CR>
 
 "设置（自动补全）功能
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
+" inoremap " ""<ESC>i
+" inoremap ' ''<ESC>i
+" inoremap ( ()<ESC>i
+" inoremap [ []<ESC>i
 " inoremap { {<CR>}<ESC>o
-inoremap { {}<ESC>i
-inoremap < <><ESC>i
+" inoremap { {}<ESC>i
+" inoremap < <><ESC>i
 "跳出补全的）和“号
 func SkipPair()
 		if getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '}' || getline('.')[col('.') - 1] == '>' || getline('.')[col('.') - 1] == "'"
