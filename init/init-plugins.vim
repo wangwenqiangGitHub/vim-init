@@ -660,6 +660,10 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" 禁用 function/buftag 的预览功能，可以手动用 p 预览
 		let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
+		 " 不能识别文件的添加和删除
+		let g:Lf_UseCache = 0
+		let g:Lf_UseMemoryCache = 0
+
 		" 使用 ESC 键可以直接退出 leaderf 的 normal 模式
 		let g:Lf_NormalMap = {
 				\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
