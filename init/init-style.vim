@@ -287,5 +287,5 @@ set tabline=%!Vim_NeatTabLine()
 set guitablabel=%{Vim_NeatGuiTabLabel()}
 set guitabtooltip=%{Vim_NeatGuiTabTip()}
 
-
-
+" 标尺
+" set cc=80
