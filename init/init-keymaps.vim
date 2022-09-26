@@ -579,3 +579,5 @@ inoremap <M-X> <BS>
 " switch 2 words
 " ----------------------
 xnoremap <M-V> <C-c>`.``gvp``P
+
+noremap <leader>cf :Dox<cr>
