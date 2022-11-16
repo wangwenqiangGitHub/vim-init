@@ -137,8 +137,8 @@ noremap <silent> <leader>bp :bp<cr>
 
 "noremap <silent> <leader>tc :tabnew<cr>
 "noremap <silent> <leader>tq :tabclose<cr>
-"noremap <silent> <leader>tn :tabnext<cr>
-"noremap <silent> <leader>tp :tabprev<cr>
+noremap <silent> <leader>tn :tabnext<cr>
+noremap <silent> <leader>tp :tabprev<cr>
 "noremap <silent> <leader>to :tabonly<cr>
 " Tabs
 nnoremap <silent> g1 :<C-u>tabfirst<CR>
