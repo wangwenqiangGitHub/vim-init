@@ -31,14 +31,14 @@ inoremap <c-_> <c-k>
 " 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
 " 与snipts快捷键冲突
-" noremap <C-h> <left>
-" noremap <C-j> <down>
-" noremap <C-k> <up>
-" noremap <C-l> <right>
-" inoremap <C-h> <left>
-" inoremap <C-j> <down>
-" inoremap <C-k> <up>
-" inoremap <C-l> <right>
+noremap <C-h> <left>
+noremap <C-j> <down>
+noremap <C-k> <up>
+noremap <C-l> <right>
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
 
 
 "----------------------------------------------------------------------
@@ -169,8 +169,8 @@ function! Tab_MoveRight()
 	endif
 endfunc
 
-noremap <silent><m-left> :call Tab_MoveLeft()<cr>
-noremap <silent><m-right> :call Tab_MoveRight()<cr>
+noremap <silent><C-left> :call Tab_MoveLeft()<cr>
+noremap <silent><C-right> :call Tab_MoveRight()<cr>
 
 
 "----------------------------------------------------------------------
@@ -565,14 +565,14 @@ noremap <LEADER>sw :set wrap<CR>
 " inoremap { {}<ESC>i
 " inoremap < <><ESC>i
 "跳出补全的）和“号
-func SkipPair()
-		if getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '}' || getline('.')[col('.') - 1] == '>' || getline('.')[col('.') - 1] == "'"
-		    return "\<ESC>la"
-		else
-				return "\t"
-		endif
-endfunc
-inoremap kk <c-r>=SkipPair()<CR>
+" func SkipPair()
+" 		if getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '}' || getline('.')[col('.') - 1] == '>' || getline('.')[col('.') - 1] == "'"
+" 		    return "\<ESC>la"
+" 		else
+" 				return "\t"
+" 		endif
+" endfunc
+" inoremap kk <c-r>=SkipPair()<CR>
 
 inoremap <M-x> <Del>
 inoremap <M-X> <BS>
@@ -581,3 +581,4 @@ inoremap <M-X> <BS>
 xnoremap <M-V> <C-c>`.``gvp``P
 
 noremap <leader>cf :Dox<cr>
+noremap <leader>0 "0p
