@@ -132,7 +132,6 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'm
 " === Markdown Settings
 " Snippets
 source ~/.vim/vim-init/init/md-snippets.vim
-
 " ===
 " === vim-instant-markdown
 " ===
@@ -779,11 +778,11 @@ if index(g:bundle_group, 'coc') >= 0
 				\ 'coc-snippets',
 				\ 'coc-cmake']
 	" coc-snippets
-	imap <C-l> <Plug>(coc-snippets-expand)
-	vmap <C-j> <Plug>(coc-snippets-select)
-	let g:coc_snippet_next = '<c-j>'
-	let g:coc_snippet_prev = '<c-k>'
-	imap <C-j> <Plug>(coc-snippets-expand-jump)
+	imap <c-n> <Plug>(coc-snippets-expand)
+	vmap <c-p> <Plug>(coc-snippets-select)
+	let g:coc_snippet_next = '<c-n>'
+	let g:coc_snippet_prev = '<c-p>'
+	imap <c-n> <Plug>(coc-snippets-expand-jump)
 endif
 " \ 'coc-diagnostic',
 " \ 'coc-go',
