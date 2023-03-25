@@ -131,7 +131,7 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'm
 " Plug 'dkarter/bullets.vim'
 " === Markdown Settings
 " Snippets
-source ~/.vim/vim-init/init/md-snippets.vim
+source ~/.config/vim-init/init/md-snippets.vim
 " ===
 " === vim-instant-markdown
 " ===
