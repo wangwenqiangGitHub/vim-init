@@ -363,7 +363,7 @@ endif
 "basic map
 "----------------------------------------------------------------------
 let g:mapleader=" "
-noremap ; :
+" noremap ; :
 noremap H ^
 noremap L $
 noremap * *zz
