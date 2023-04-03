@@ -579,9 +579,8 @@ inoremap <M-X> <BS>
 " switch 2 words
 " ----------------------
 xnoremap <M-V> <C-c>`.``gvp``P
-
 noremap <leader>cf :Dox<cr>
 noremap <leader>0 "0p
 vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
-map <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
-map! <leader>pp <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
+" noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
+" noremap! <leader>pp <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
