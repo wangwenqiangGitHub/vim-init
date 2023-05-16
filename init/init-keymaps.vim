@@ -595,3 +595,13 @@ vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
 " noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 " noremap! <leader>pp <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 noremap <leader>4 :s/\(\w.*\)/data[10] = "\1";<left><left><left><left><left><left><left>
+" 设置代码80个字符限制竖线
+function ToggleTextWidth()
+	if &colorcolumn == ""
+		highlight ColorColumn ctermbg=green guibg=green
+		set colorcolumn=80
+	else
+		set colorcolumn=""
+	endif
+endfunction
+nnoremap <F8> :call ToggleTextWidth()<CR>
