@@ -852,7 +852,7 @@ let g:floaterm_keymap_next   = '<C-f>n'
 let g:floaterm_keymap_prev   = '<C-f>p'
 let g:floaterm_keymap_new    = '<C-f>o'
 let g:floaterm_keymap_kill   = '<leader>q'
-nnoremap <silent> <C-t>g :FloatermNew --height=0.8 --width=0.8 --position=center lazygit<CR>
+nnoremap <silent> <leader>g :FloatermNew --height=0.8 --width=0.8 --position=center lazygit<CR>
 " Floaterm
 "let g:floaterm_gitcommit='floaterm'
 "let g:floaterm_autoinsert=1
