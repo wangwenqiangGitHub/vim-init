@@ -18,7 +18,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group += ['tags', 'airline', 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['coc', 'go']
-	let g:bundle_group += ['ranger']
+	" let g:bundle_group += ['ranger']
 	let g:bundle_group += ['floaterm']
 endif
 " 已经不使用nerdtree插件
