@@ -65,7 +65,9 @@ let g:asynctasks_extra_config = [
 noremap <space>te :AsyncTaskEdit<cr>
 noremap <space>tg :AsyncTaskEdit!<cr>
 noremap <space>tfb :AsyncTask file-build<cr>
+noremap <silent><f9> :AsyncTask file-build<cr>
 noremap <space>tfr :AsyncTask file-run<cr>
+noremap <silent><f5> :AsyncTask file-run<cr>
 noremap <space>tfd :AsyncTask file-debug<cr>
 noremap <silent><f6> :AsyncTask project-init<cr>
 noremap <silent><f7> :AsyncTask project-build<cr>
@@ -143,7 +145,8 @@ source ~/.config/vim-init/init/md-snippets.vim
 " let g:instant_markdown_mathjax = 1
 " let g:instant_markdown_autoscroll = 1
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install', 'for': 'markdown','commit':'e5bfe9b'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install', 'for': 'markdown','commit':'e5bfe9b'}
 " let g:mkdp_path_to_chrome='/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome'
 " 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
 " markdown 文件的时候打开一次

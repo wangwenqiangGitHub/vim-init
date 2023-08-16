@@ -137,9 +137,10 @@ noremap <silent> <leader>bp :bp<cr>
 
 "noremap <silent> <leader>tc :tabnew<cr>
 "noremap <silent> <leader>tq :tabclose<cr>
-noremap <silent> <leader>tn :tabnext<cr>
-noremap <silent> <leader>tp :tabprev<cr>
 "noremap <silent> <leader>to :tabonly<cr>
+noremap <silent> <A-h> :tabnext<cr>
+noremap <silent> <A-l> :tabprev<cr>
+noremap <silent> <A-c> :tabclose<cr>
 " Tabs
 nnoremap <silent> g1 :<C-u>tabfirst<CR>
 nnoremap <silent> g5 :<C-u>tabprevious<CR>
@@ -178,8 +179,8 @@ noremap <silent><C-right> :call Tab_MoveRight()<cr>
 "----------------------------------------------------------------------
 
 " ALT+h/l 快速左右按单词移动（正常模式+插入模式）
-noremap <m-h> b
-noremap <m-l> w
+" noremap <m-h> b
+" noremap <m-l> w
 inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
 
