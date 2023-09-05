@@ -606,3 +606,12 @@ function ToggleTextWidth()
 	endif
 endfunction
 nnoremap <F8> :call ToggleTextWidth()<CR>
+
+"----------------------------------------------------------------------
+" c/c++  a.vim keymaps
+"----------------------------------------------------------------------
+nnoremap <leader>aa :A<cr>
+nnoremap <leader>av :AV<cr>
+nnoremap <leader>as :AS<cr>
+nnoremap <leader>at :AT<cr>
+

@@ -69,9 +69,9 @@ noremap <silent><f9> :AsyncTask file-build<cr>
 noremap <space>tfr :AsyncTask file-run<cr>
 noremap <silent><f5> :AsyncTask file-run<cr>
 noremap <space>tfd :AsyncTask file-debug<cr>
-noremap <silent><f6> :AsyncTask project-init<cr>
-noremap <silent><f7> :AsyncTask project-build<cr>
-" noremap <space>tpi :AsyncTask project-init<cr>
+noremap <silent><s-f5> :AsyncTask project-run<cr>
+noremap <silent><s-f9> :AsyncTask project-build<cr>
+noremap <silent><s-f7> :AsyncTask project-init<cr>
 " noremap <space>tpb :AsyncTask project-build<cr>
 noremap <space>tpr :AsyncTask project-run<cr>
 noremap <space>tpd :AsyncTask project-debug<cr>
@@ -246,6 +246,9 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" 快速编辑
 	Plug 'tpope/vim-surround'
+
+	" c/cpp源文件与头文件切换
+	Plug 'vim-scripts/a.vim'
 
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
