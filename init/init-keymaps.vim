@@ -491,6 +491,7 @@ noremap <silent> sk <C-W>k
 noremap <silent> sj <C-W>j
 noremap <silent> sh <C-W>h
 noremap <silent> sl <C-W>l
+noremap <silent> sn :tabnext<CR>
 
 function! s:toggle_background()
 	if ! exists('g:colors_name')
