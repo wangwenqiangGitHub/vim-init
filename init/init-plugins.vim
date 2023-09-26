@@ -45,7 +45,9 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 "----------------------------------------------------------------------
 " 默认插件 
 "----------------------------------------------------------------------
-
+" Draw ASCII diagrams in Vim
+" set virtualedit+=all
+Plug 'gyim/vim-boxdraw'
 "编译
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
