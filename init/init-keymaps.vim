@@ -1,5 +1,13 @@
 "======================================================================
 "
+" init-keymaps.vim -
+"
+" Created by wwq on 2024/03/07
+" Last Modified: 2024/03/07 09:54:25
+"
+"======================================================================
+"======================================================================
+"
 " init-keymaps.vim - 按键设置，按你喜欢更改
 "
 "   - 快速移动
@@ -184,7 +192,7 @@ noremap <silent><C-right> :call Tab_MoveRight()<cr>
 inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
 
-" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转） 
+" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
 " 目前多行编辑占用
 " noremap <m-j> gj
 " noremap <m-k> gk
@@ -239,7 +247,10 @@ nnoremap <silent><Tab>n :tabnext<CR>
 nnoremap <silent><Tab>p :tabprevious<CR>
 nnoremap <silent><Tab>m :tabm<Space>
 nnoremap <tab><cr> <C-w>T
-nnoremap <tab><Tab> <C-w>r
+
+nnoremap <tab>r <C-w>r
+" 会与<c-i><c-i>冲突
+" nnoremap <tab><Tab> <C-w>r
 
 if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
 	" vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式
@@ -354,17 +365,17 @@ endfunc
 " 下面进行 grep，这样能方便的对相关项目进行搜索
 "----------------------------------------------------------------------
 if executable('rg')
-	noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading 
-				\ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim 
+	noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading
+				\ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim
 				\ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
-	noremap <silent><F2> :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
+	noremap <silent><F2> :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>"
 				\ "\%CD\%\*.h" "\%CD\%\*.c*" "\%CD\%\*.py" "\%CD\%\*.js"
 				\ "\%CD\%\*.vim"
 				\ <cr>
 else
-	noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
-				\ --include='*.h' --include='*.c*' --include='*.py' 
+	noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W>
+				\ --include='*.h' --include='*.c*' --include='*.py'
 				\ --include='*.js' --include='*.vim'
 				\ '<root>' <cr>
 endif
@@ -597,6 +608,16 @@ vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
 " noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 " noremap! <leader>pp <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 noremap <leader>4 :s/\(\w.*\)/data[10] = "\1";<left><left><left><left><left><left><left>
+"----------------------------------------------------------------------
+" % 表示当前文件的所有行。s 是 Vim 中替换命令的缩写，表示替换操作。
+" /\s\+$/ 是 Vim 的正则表达式，用于匹配行末的空白字符
+" \s 匹配任何空白字符，包括空格、制表符等
+" \+ 匹配一个或多个前面的元素（在这里是 \s)
+" $ 表示行的末尾  
+" // 表示替换为的内容，这里为空，即删除匹配到的内容。
+" e是一个标志，表示如果替换没有发生，则不显示错误信息。这可以避免在没有找到匹配项时产生不必要的输出。
+"----------------------------------------------------------------------
+" noremap <leader>3 :%s/\s\+$//<cr>
 " 设置代码80个字符限制竖线
 function ToggleTextWidth()
 	if &colorcolumn == ""
