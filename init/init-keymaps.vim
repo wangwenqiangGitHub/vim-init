@@ -289,9 +289,10 @@ endif
 
 " F9 编译 C/C++ 文件
 " nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <F9> :AsyncRun g++ -std=c++11 -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " F5 运行文件
-" nnoremap <silent> <F5> :call ExecuteFile()<cr>
+nnoremap <silent> <F5> :call ExecuteFile()<cr>
 
 " F7 编译项目
 " nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
@@ -604,7 +605,7 @@ inoremap <M-X> <BS>
 xnoremap <M-V> <C-c>`.``gvp``P
 noremap <leader>cf :Dox<cr>
 noremap <leader>0 "0p
-vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
+" vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
 " noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 " noremap! <leader>pp <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 noremap <leader>4 :s/\(\w.*\)/data[10] = "\1";<left><left><left><left><left><left><left>
@@ -637,3 +638,5 @@ nnoremap <leader>av :AV<cr>
 nnoremap <leader>as :AS<cr>
 nnoremap <leader>at :AT<cr>
 
+" 共享剪切板
+vmap <leader>y "+y

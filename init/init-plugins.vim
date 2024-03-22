@@ -20,6 +20,9 @@ if !exists('g:bundle_group')
 	let g:bundle_group += ['coc', 'go']
 	" let g:bundle_group += ['ranger']
 	let g:bundle_group += ['floaterm']
+	let g:bundle_group += ['plantUML']
+	let g:bundle_group += ['ascii']
+	let g:bundle_group += ['comment']
 endif
 " 已经不使用nerdtree插件
 " 已经不使用defx插件'nerdtree', 'defx',
@@ -135,7 +138,7 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'm
 " Plug 'dkarter/bullets.vim'
 " === Markdown Settings
 " Snippets
-source ~/.config/vim-init/init/md-snippets.vim
+source ~/.vim/vim-init/init/md-snippets.vim
 " ===
 " === vim-instant-markdown
 " ===
@@ -625,7 +628,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" noremap <leader>fc :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 		" noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 		" noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
-		" noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
+		noremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
 		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -e")<CR><CR>
 		noremap <leader>fe :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 		"整个工程搜索字段
@@ -635,7 +638,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<cr>
 		noremap <leader>fr :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", "")<cr>
 		"search word under cursor in *.h and *.cpp files.
-		noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,hpp,cpp,cc,c,go} ", expand("<cword>"))<cr><cr>
+		" noremap <Leader>fw :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,hpp,cpp,cc,c,go} ", expand("<cword>"))<cr><cr>
 
 		" 最大历史文件保存 2048 个
 		let g:Lf_MruMaxFiles = 2048
@@ -678,6 +681,8 @@ if index(g:bundle_group, 'leaderf') >= 0
 		 " 不能识别文件的添加和删除
 		let g:Lf_UseCache = 0
 		let g:Lf_UseMemoryCache = 0
+
+		let g:Lf_PreviewInPopup = 1
 
 		" 使用 ESC 键可以直接退出 leaderf 的 normal 模式
 		let g:Lf_NormalMap = {
@@ -792,6 +797,8 @@ if index(g:bundle_group, 'coc') >= 0
 				\ 'coc-clangd',
 				\ 'coc-pyright',
 				\ 'coc-snippets',
+				\ 'coc-lua',
+				\ 'coc-sumneko-lua',
 				\ 'coc-cmake']
 	" coc-snippets
 	imap <c-n> <Plug>(coc-snippets-expand)
@@ -855,6 +862,28 @@ let g:ranger_explorer_keymap_vsplit  = '<C-v>'
 " nnoremap <silent><Leader>rf :RangerOpenCurrentFile<CR>
 nnoremap <silent>rc :RangerOpenCurrentDir<CR>
 nnoremap <silent>rp :RangerOpenProjectRootDir<CR>
+endif
+
+"----------------------------------------------------------------------
+"  plantUML 
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'plantUML') >= 0
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
+endif
+
+"----------------------------------------------------------------------
+"  <leader>di start draw it
+"  <leader>ds stop draw it
+"  https://github.com/yangyangwithgnu/use_vim_as_ide?tab=readme-ov-file
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'ascii') >= 0
+Plug 'vim-scripts/DrawIt'
+endif
+
+if index(g:bundle_group, 'comment') >= 0
+Plug 'scrooloose/nerdcommenter'
 endif
 
 "----------------------------------------------------------------------
