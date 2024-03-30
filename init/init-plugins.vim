@@ -138,7 +138,7 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'm
 " Plug 'dkarter/bullets.vim'
 " === Markdown Settings
 " Snippets
-source ~/.vim/vim-init/init/md-snippets.vim
+source ~/.config/vim-init/init/md-snippets.vim
 " ===
 " === vim-instant-markdown
 " ===
@@ -261,7 +261,18 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'tpope/vim-surround'
 
 	" c/cpp源文件与头文件切换
-	Plug 'vim-scripts/a.vim'
+	Plug 'wangwenqiangGitHub/a.vim'
+
+	" format code
+	Plug 'rhysd/vim-clang-format'
+	let g:clang_format#detect_style_file = 1
+	" map to <Leader>cf in C++ code
+	autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+	autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+	" if you install vim-operator-user
+	autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+	" Toggle auto formatting:
+	nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
@@ -411,6 +422,7 @@ if index(g:bundle_group, 'filetypes') >= 0
 
 	" C++ 语法高亮增强，支持 11/14/17 标准
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
+	Plug 'bfrg/vim-cpp-modern'
 
 	" 额外语法文件
 	Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
@@ -797,10 +809,10 @@ if index(g:bundle_group, 'coc') >= 0
 				\ 'coc-clangd',
 				\ 'coc-pyright',
 				\ 'coc-snippets',
-				\ 'coc-lua',
-				\ 'coc-sumneko-lua',
 				\ 'coc-cmake']
 	" coc-snippets
+	" \ 'coc-lua',
+	" \ 'coc-sumneko-lua',
 	imap <c-n> <Plug>(coc-snippets-expand)
 	vmap <c-p> <Plug>(coc-snippets-select)
 	let g:coc_snippet_next = '<c-n>'
