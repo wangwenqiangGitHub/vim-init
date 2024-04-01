@@ -605,9 +605,8 @@ inoremap <M-X> <BS>
 xnoremap <M-V> <C-c>`.``gvp``P
 noremap <leader>df :Dox<cr>
 noremap <leader>0 "0p
-" vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
-" noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
-" noremap! <leader>pp <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
+vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
+noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 noremap <leader>4 :s/\(\w.*\)/data[10] = "\1";<left><left><left><left><left><left><left>
 "----------------------------------------------------------------------
 " % 表示当前文件的所有行。s 是 Vim 中替换命令的缩写，表示替换操作。
