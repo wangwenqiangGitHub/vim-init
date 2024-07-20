@@ -641,3 +641,4 @@ nnoremap <leader>at :AT<cr>
 
 " 共享剪切板
 vmap <leader>y "+y
+set pastetoggle=<leader>tp
