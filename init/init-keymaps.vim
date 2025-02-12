@@ -603,7 +603,7 @@ inoremap <M-X> <BS>
 " switch 2 words
 " ----------------------
 xnoremap <M-V> <C-c>`.``gvp``P
-noremap <leader>df :Dox<cr>
+noremap <leader>dc :Dox<cr>
 noremap <leader>0 "0p
 if exists('$WSL_DISTRO_NAME')
 	vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
@@ -642,3 +642,7 @@ nnoremap <leader>at :AT<cr>
 " 共享剪切板
 vmap <leader>y "+y
 set pastetoggle=<leader>tp
+
+nnoremap <leader>q :q<cr>
+nnoremap <leader>ee :set fileencoding=gbk<cr>
+nnoremap <leader>er :AsyncRun -mode=term -pos=hide cd %:p:h && explorer.exe .<cr>
