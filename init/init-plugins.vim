@@ -23,6 +23,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group += ['plantUML']
 	let g:bundle_group += ['ascii']
 	let g:bundle_group += ['comment']
+	let g:bundle_group += ['zfvim']
 endif
 " 已经不使用nerdtree插件
 " 已经不使用defx插件'nerdtree', 'defx',
@@ -83,6 +84,9 @@ noremap <space>tpd :AsyncTask project-debug<cr>
 
 noremap <silent><f1> :AsyncRun scp build/ncs_4layer/ncs_4layer root@192.216.20.:/var/
 noremap <silent><f2> :AsyncRun scp build/ncsrt_4layer/libncsrt_4layer.so root@192.216.20.:/var/
+
+"cmake
+" Plug 'cdelledonne/vim-cmake'
 "自动补全
 Plug 'wellle/tmux-complete.vim'
 
@@ -223,7 +227,15 @@ augroup MyPluginSetup
 	autocmd FileType dirvish call s:setup_dirvish()
 augroup END
 
+if index(g:bundle_group, 'zfvim') >= 0
+	Plug 'ZSaberLv0/ZFVimDirDiff'
+	Plug 'ZSaberLv0/ZFVimJob' " required
+	Plug 'ZSaberLv0/ZFVimIgnore' " optional, but recommended for auto ignore setup
+	Plug 'ZSaberLv0/ZFVimBackup' " optional, but recommended for auto backup
+	Plug 'ZSaberLv0/ZFVimIndentMove'
 
+endif
+	
 "----------------------------------------------------------------------
 " 基础插件
 "----------------------------------------------------------------------
@@ -262,6 +274,7 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" c/cpp源文件与头文件切换
 	Plug 'wangwenqiangGitHub/a.vim'
+	Plug 'skywind3000/vim-cppman'
 
 	" format code
 	Plug 'rhysd/vim-clang-format'
