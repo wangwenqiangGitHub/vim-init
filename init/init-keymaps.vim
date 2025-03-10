@@ -607,6 +607,12 @@ noremap <leader>dc :Dox<cr>
 noremap <leader>0 "0p
 if exists('$WSL_DISTRO_NAME')
 	vmap <leader>yy :!/mnt/c/Windows/System32/clip.exe <cr>u
+	" 记录一下安装 paste.exe过程
+	" 启用或者关闭Windows功能 选择.NET framwork 3.5
+	" windows更新; 如果出错: windows terminal 执行
+	" net stop wuauserv
+	" reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+	" net start wuauserv  重启吧多windows检查更新几次
 	noremap <leader>pp :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
 endif
 noremap <leader>4 :s/\(\w.*\)/data[10] = "\1";<left><left><left><left><left><left><left>
