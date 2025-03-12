@@ -652,3 +652,68 @@ set pastetoggle=<leader>tp
 nnoremap <leader>q :q<cr>
 nnoremap <leader>ee :set fileencoding=gbk<cr>
 nnoremap <leader>er :AsyncRun -mode=term -pos=hide cd %:p:h && explorer.exe .<cr>
+
+" 增加选中部分删除一些字段,比如override , virtual等
+function! CleanWords() range
+	let words = ['override', 'virtual']
+	for word in words
+		execute a:firstline . "," . a:lastline . 's/\<' . word . '\>//ge'
+	endfor
+	execute a:firstline . "," . a:lastline . 's/^\s*\(/\{-}\)\s*$/\1/ge'
+endfunction
+
+" 根据.h 文件中class生成.cpp
+function! CopyClassToImpl()
+    " 移动到文件开始
+    normal! gg
+
+    " 查找 class 关键字
+    if search('class', 'W')
+        " 获取当前行内容
+        let line = getline('.')
+        " 直接获取 class 后面的单词作为类名
+        let classname = matchstr(line, 'class\s\+\zs\w\+')
+        echo "类名: " . classname
+
+        " 收集函数声明
+        normal! /{\<CR>
+        normal! j
+        let functions = []
+        while getline('.') !~ '}'
+            let line = getline('.')
+            " 跳过访问修饰符和空行
+            if line =~ '^\s*\(public\|private\|protected\):\|^\s*$'
+                normal! j
+                continue
+            endif
+
+            " 如果是函数声明（以分号结尾）
+            if line =~ ';$'
+                let clean_line = substitute(line, '^\s*', '', '')
+                let clean_line = substitute(clean_line, ';$', '', '')
+                let clean_line = substitute(clean_line, '\<override\>\s*', '', 'g')
+                let clean_line = substitute(clean_line, '\<virtual\>\s*', '', 'g')
+                let func_impl = substitute(clean_line, '\(\w\+\)\s\+\(\w\+\)\s*\((.*)\)', '\1 ' . classname . '::\2\3', '')
+                call add(functions, func_impl)
+            endif
+            normal! j
+        endwhile
+
+        " 切换到cpp文件
+        let impl_file = expand('%:r') . '.cpp'
+        execute 'edit ' . impl_file
+        normal! G
+
+        " 添加函数实现
+        for func in functions
+            let implementation = func . " {\n    // 实现\n}\n\n"
+            put =implementation
+        endfor
+    else
+        echo "未找到 class 关键字"
+    endif
+
+endfunction
+
+nnoremap <Leader>ww :call CopyClassToImpl()<CR>
+
