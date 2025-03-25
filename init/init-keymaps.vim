@@ -689,13 +689,22 @@ function! CopyClassToImpl()
 
             " 如果是函数声明（以分号结尾）
             if line =~ ';$'
+                " 调试：原始行内容
+				" echo "原始行: [" . line . "]"
                 let clean_line = substitute(line, '^\s*', '', '')
                 let clean_line = substitute(clean_line, ';$', '', '')
                 let clean_line = substitute(clean_line, '\<override\>\s*', '', 'g')
                 let clean_line = substitute(clean_line, '\<virtual\>\s*', '', 'g')
-                let func_impl = substitute(clean_line, '\(\w\+\)\s\+\(\w\+\)\s*\((.*)\)', '\1 ' . classname . '::\2\3', '')
+
+				" 调试：清理后的行
+				" echo "清理后: [" . clean_line . "]"
+                " let func_impl = substitute(clean_line, '\(\w\+\)\s\+\(\w\+\)\s*\((.*)\)', '\1 ' . classname . '::\2\3', '')
+                let func_impl = substitute( clean_line, '\(\w\+\s\+\)\?\(\~\?\w\+\)\s*\((.*)\)', '\=submatch(1) . classname . "::" . submatch(2) . submatch(3)', '')
+				" echo "func: [" . func_impl . "]"
+				" echo "clean_line: [" . clean_line . "]"
                 call add(functions, func_impl)
             endif
+
             normal! j
         endwhile
 
